@@ -15,18 +15,14 @@ class CustomButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: width ?? double.infinity,
-      child: FilledButton(
+        width: width ?? double.infinity,
+        child: FilledButton(
           style: FilledButton.styleFrom(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10)),
-              backgroundColor: Color(0xFFd12f26)),
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+          ),
           onPressed: onPressed,
-          child: Text(text,
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold))),
-    );
+          child: Text(text, style: Theme.of(context).textTheme.titleMedium),
+        ));
   }
 }
