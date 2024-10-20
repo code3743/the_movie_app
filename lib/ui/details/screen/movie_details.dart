@@ -33,12 +33,14 @@ class MovieDetails extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               child: MovieDetail(
-                  title: 'Naruto Shippuden',
-                  genre: 'Action, Adventure, Fantasy',
-                  year: '2021',
-                  rating: '4.5',
-                  overview:
-                      'Naruto Shippuden is a Japanese manga series written and illustrated by Masashi Kishimoto. It tells the story of Naruto Uzumaki, a young ninja who seeks recognition from his peers and dreams of becoming the Hokage, the leader of his village.'),
+                title: 'Naruto Shippuden',
+                genre: 'Action, Adventure, Fantasy',
+                year: '2021',
+                rating: '4.5',
+                overview:
+                    'Naruto Shippuden is a Japanese manga series written and illustrated by Masashi Kishimoto. It tells the story of Naruto Uzumaki, a young ninja who seeks recognition from his peers and dreams of becoming the Hokage, the leader of his village.',
+                duration: '2h 32m',
+              ),
             ),
             MovieCast(),
             MovieCollection(colelctionName: 'Related Movies'),

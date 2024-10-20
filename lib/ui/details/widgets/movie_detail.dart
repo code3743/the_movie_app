@@ -11,6 +11,7 @@ class MovieDetail extends StatelessWidget {
     required this.year,
     required this.rating,
     required this.overview,
+    required this.duration,
   });
 
   final String title;
@@ -18,6 +19,7 @@ class MovieDetail extends StatelessWidget {
   final String year;
   final String rating;
   final String overview;
+  final String duration;
 
   @override
   Widget build(BuildContext context) {
@@ -61,6 +63,10 @@ class MovieDetail extends StatelessWidget {
             )
           ],
         ),
+        SizedBox(height: 5),
+        Text(duration,
+            textAlign: TextAlign.left,
+            style: Theme.of(context).textTheme.bodySmall),
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 20),
           child: CustomButton(text: 'Trailer', onPressed: () {}),
