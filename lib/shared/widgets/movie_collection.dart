@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:the_movie_app/config/router/app_router_name.dart';
+import 'package:the_movie_app/shared/widgets/movie_tile.dart';
 
 class MovieCollection extends StatelessWidget {
   const MovieCollection({
@@ -30,47 +33,18 @@ class MovieCollection extends StatelessWidget {
               itemCount: 10,
               itemBuilder: (context, index) {
                 return Padding(
-                  padding: index == 0
-                      ? const EdgeInsets.only(
-                          left: 20, top: 8, bottom: 8, right: 8)
-                      : const EdgeInsets.all(8.0),
-                  child: GestureDetector(
-                    onTap: () {
-                      print('Selected index: $index');
-                    },
-                    child: SizedBox(
-                        width: 100,
-                        height: double.infinity,
-                        child: Column(
-                          children: [
-                            Expanded(
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(10),
-                                child: Image.network(
-                                  'https://cinexagerar.com/wp-content/uploads/2021/08/CATCHPHRASE_INTL_CHARACTER_BANNER_RYAN_LAS.jpg',
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                                width: double.infinity,
-                                height: 30,
-                                child: Text(
-                                  'Movie $index' * 5,
-                                  textAlign: TextAlign.center,
-                                  overflow: TextOverflow.ellipsis,
-                                  maxLines: 2,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodySmall!
-                                      .copyWith(
-                                          height: 1.1,
-                                          fontWeight: FontWeight.w600),
-                                )),
-                          ],
-                        )),
-                  ),
-                );
+                    padding: index == 0
+                        ? const EdgeInsets.only(
+                            left: 20, top: 8, bottom: 8, right: 8)
+                        : const EdgeInsets.all(8.0),
+                    child: MovieTile(
+                      title: 'Free Guy',
+                      poster:
+                          'https://cinexagerar.com/wp-content/uploads/2021/08/CATCHPHRASE_INTL_CHARACTER_BANNER_RYAN_LAS.jpg',
+                      onTap: () {
+                        context.push(AppRouterName.movieDetail);
+                      },
+                    ));
               },
             ),
           )
