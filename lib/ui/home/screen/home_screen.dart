@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:the_movie_app/shared/widgets/app_logo.dart';
+import 'package:the_movie_app/shared/widgets/widgets.dart';
 import 'package:the_movie_app/ui/home/widgets/widgets.dart';
-import 'package:the_movie_app/shared/widgets/movie_collection.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -10,57 +9,27 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: CustomScrollView(
-          slivers: [
-            SliverToBoxAdapter(
-              child: Stack(
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Stack(
                 children: [
                   MovieBanner(),
                   CustomAppBar(),
                 ],
               ),
-            ),
-            SliverToBoxAdapter(
-              child: MovieCollection(
+              MovieCollection(
                 colelctionName: 'Popular Movies',
               ),
-            ),
-            SliverToBoxAdapter(
-              child: MovieCollection(
-                colelctionName: 'Commings Soon',
+              MovieCollection(
+                colelctionName: 'Coming Soon',
               ),
-            ),
-            SliverToBoxAdapter(
-              child: ListCategory(
-                categories: List.generate(10, (index) => 'Category $index'),
-                onTap: (index) {
-                  print('Selected index: $index');
-                },
-              ),
-            ),
-            SliverPadding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-              sliver: SliverGrid(
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    childAspectRatio: 0.7,
-                    crossAxisSpacing: 10,
-                    mainAxisSpacing: 10,
-                  ),
-                  delegate: SliverChildBuilderDelegate(
-                    (context, index) {
-                      return Container(
-                        color:
-                            Colors.primaries[index % Colors.primaries.length],
-                        child: Center(
-                          child: Text('Item $index'),
-                        ),
-                      );
-                    },
-                    childCount: 10,
-                  )),
-            )
-          ],
+              MovieGenreSection(),
+              SizedBox(
+                height: 60,
+              )
+            ],
+          ),
         ),
       ),
     );
