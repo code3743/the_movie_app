@@ -18,6 +18,7 @@ class MoviePoster extends StatelessWidget {
         Image.network(
           formatImageUrl(poster),
           width: double.infinity,
+          errorBuilder: (context, error, stackTrace) => Icon(Icons.error),
           height: 445,
           fit: BoxFit.cover,
         ),

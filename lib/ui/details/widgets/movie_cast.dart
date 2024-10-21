@@ -56,6 +56,8 @@ class MovieCast extends StatelessWidget {
                             clipBehavior: Clip.antiAlias,
                             child: Image.network(
                               formatImageUrl(casts[index].profileImage),
+                              errorBuilder: (context, error, stackTrace) =>
+                                  Icon(Icons.error),
                               fit: BoxFit.cover,
                             ),
                           ),

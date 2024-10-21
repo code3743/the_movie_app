@@ -23,7 +23,10 @@ class MovieTile extends StatelessWidget {
             Expanded(
                 child: ClipRRect(
               borderRadius: BorderRadius.circular(10),
-              child: Image.network(poster, fit: BoxFit.cover),
+              child: Image.network(poster,
+                  fit: BoxFit.cover,
+                  errorBuilder: (context, error, stackTrace) =>
+                      Icon(Icons.error)),
             )),
             SizedBox(
                 width: double.infinity,

@@ -17,6 +17,7 @@ class MoviePreview extends StatelessWidget {
           decoration: BoxDecoration(
             image: DecorationImage(
               image: NetworkImage(formatImageUrl(poster)),
+              onError: (exception, stackTrace) => Icon(Icons.error),
               fit: BoxFit.cover,
               colorFilter: ColorFilter.mode(
                 Colors.black.withOpacity(.8),
@@ -24,12 +25,11 @@ class MoviePreview extends StatelessWidget {
               ),
             ),
           ),
-          child: Image.network(
-            formatImageUrl(poster),
-            width: double.infinity,
-            height: double.infinity,
-            fit: BoxFit.contain,
-          ),
+          child: Image.network(formatImageUrl(poster),
+              width: double.infinity,
+              height: double.infinity,
+              fit: BoxFit.contain,
+              errorBuilder: (context, error, stackTrace) => Icon(Icons.error)),
         ),
         Container(
           width: double.infinity,
