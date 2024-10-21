@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:the_movie_app/shared/utils/format_image_url.dart';
 
 class MoviesList extends StatefulWidget {
   const MoviesList({
     super.key,
+    required this.moviePosters,
   });
-
+  final List<String> moviePosters;
   @override
   State<MoviesList> createState() => _MoviesListState();
 }
@@ -24,8 +26,11 @@ class _MoviesListState extends State<MoviesList> with TickerProviderStateMixin {
               _scrollController.position.maxScrollExtent * _animation.value);
         });
     });
-    _controller =
-        AnimationController(vsync: this, duration: const Duration(minutes: 2));
+
+    _controller = AnimationController(
+        vsync: this,
+        duration: Duration(seconds: 12 * widget.moviePosters.length))
+      ..repeat(reverse: true);
     _controller.repeat(reverse: true);
   }
 
@@ -40,7 +45,7 @@ class _MoviesListState extends State<MoviesList> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return ListView.builder(
       controller: _scrollController,
-      itemCount: 10,
+      itemCount: widget.moviePosters.length,
       itemBuilder: (context, index) {
         return SizedBox(
           child: Padding(
@@ -50,7 +55,9 @@ class _MoviesListState extends State<MoviesList> with TickerProviderStateMixin {
               child: AspectRatio(
                   aspectRatio: 1 / 1.5,
                   child: Image.network(
-                      'https://cinexagerar.com/wp-content/uploads/2021/08/CATCHPHRASE_INTL_CHARACTER_BANNER_RYAN_LAS.jpg')),
+                    formatImageUrl(widget.moviePosters[index]),
+                    fit: BoxFit.cover,
+                  )),
             ),
           ),
         );

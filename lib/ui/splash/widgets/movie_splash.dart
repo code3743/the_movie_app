@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:the_movie_app/config/themes/app_colors.dart';
+import 'package:the_movie_app/shared/providers/now_playing_provider.dart';
 import 'package:the_movie_app/ui/splash/widgets/movie_list.dart';
 
 class MovieSplash extends StatelessWidget {
@@ -15,7 +17,26 @@ class MovieSplash extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 40),
-            child: MoviesList(),
+            child: Consumer(builder: (context, ref, _) {
+              return FutureBuilder(
+                  future: ref.watch(nowPlayingProvider.future),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasError) {
+                      return Center(
+                        child: Text('An error occurred'),
+                      );
+                    }
+
+                    if (!snapshot.hasData) {
+                      return SizedBox();
+                    }
+
+                    return MoviesList(
+                      moviePosters:
+                          snapshot.data!.map((e) => e.posterPath).toList(),
+                    );
+                  });
+            }),
           ),
           SizedBox(
             width: double.infinity,

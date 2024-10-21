@@ -65,7 +65,7 @@ class SplashScreen extends StatelessWidget {
                           ],
                         )),
                     Text(
-                      'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+                      'Get access to thousands of movies.',
                       style: Theme.of(context).textTheme.bodySmall,
                       textAlign: TextAlign.center,
                     ),
