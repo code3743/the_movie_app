@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:the_movie_app/config/router/app_router.dart';
 import 'package:the_movie_app/config/themes/app_themes.dart';
-import 'package:the_movie_app/shared/providers/genre_provider.dart';
+import 'package:the_movie_app/common/providers/genre_provider.dart';
 
 void main() {
   runApp(ProviderScope(child: const MainApp()));
