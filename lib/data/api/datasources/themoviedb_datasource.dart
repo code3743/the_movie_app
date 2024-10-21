@@ -1,4 +1,5 @@
 import 'package:http/http.dart' as http;
+import 'package:the_movie_app/data/api/exceptions/api_exception.dart';
 import 'package:the_movie_app/domain/entites/cast.dart';
 import 'package:the_movie_app/domain/entites/genre.dart';
 import 'package:the_movie_app/domain/entites/movie.dart';
@@ -24,11 +25,15 @@ class ThemoviedbDatasource implements MovieDatasource {
       final response = await http.get(url, headers: headers);
 
       if (response.statusCode != 200) {
-        throw Exception('Failed to load movies');
+        throw ApiException('Failed to load movies');
       }
       return movieResponseFromJson(response.body).toEntity();
     } catch (e) {
-      throw Exception(e);
+      if (e is ApiException) {
+        rethrow;
+      } else {
+        throw ApiException('An error occurred: $e');
+      }
     }
   }
 
@@ -41,12 +46,16 @@ class ThemoviedbDatasource implements MovieDatasource {
           {'language': ApiThemoviedb.language});
       final response = await http.get(url, headers: headers);
       if (response.statusCode != 200) {
-        throw Exception('Failed to load casts');
+        throw ApiException('Failed to load casts');
       }
 
       return castingModelFromJson(response.body).toEntity();
     } catch (e) {
-      rethrow;
+      if (e is ApiException) {
+        rethrow;
+      } else {
+        throw ApiException('An error occurred: $e');
+      }
     }
   }
 
@@ -66,12 +75,16 @@ class ThemoviedbDatasource implements MovieDatasource {
       final response = await http.get(url, headers: headers);
 
       if (response.statusCode != 200) {
-        throw Exception('Failed to load genres');
+        throw ApiException('Failed to load genres');
       }
 
       return detailsFromJson(response.body).genresToEntity();
     } catch (e) {
-      rethrow;
+      if (e is ApiException) {
+        rethrow;
+      } else {
+        throw ApiException('An error occurred: $e');
+      }
     }
   }
 
@@ -124,7 +137,7 @@ class ThemoviedbDatasource implements MovieDatasource {
       final response = await http.get(url, headers: headers);
 
       if (response.statusCode != 200) {
-        throw Exception('Failed to load movie detail');
+        throw ApiException('Failed to load movie');
       }
       final details = detailsFromJson(response.body);
 
@@ -133,7 +146,11 @@ class ThemoviedbDatasource implements MovieDatasource {
 
       return movie;
     } catch (e) {
-      rethrow;
+      if (e is ApiException) {
+        rethrow;
+      } else {
+        throw ApiException('An error occurred: $e');
+      }
     }
   }
 
