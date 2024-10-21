@@ -1,3 +1,5 @@
+import 'package:the_movie_app/domain/entites/cast.dart';
+import 'package:the_movie_app/domain/entites/movie.dart';
 import 'package:the_movie_app/domain/repositories/movie_repository.dart';
 
 class MovieUsecase {
@@ -5,27 +7,31 @@ class MovieUsecase {
 
   MovieUsecase(this.repository);
 
-  Future getMoviesbyGenre(int page, int genre) async {
+  Future<List<Movie>> getMoviesbyGenre(int page, int genre) async {
     return await repository.getMoviesbyGenre(page, genre);
   }
 
-  Future getNowPlaying() async {
+  Future<List<Movie>> getNowPlaying() async {
     return await repository.getNowPlaying();
   }
 
-  Future getCoomingSoon(int page) async {
+  Future<List<Movie>> getCoomingSoon(int page) async {
     return await repository.getCoomingSoon(page);
   }
 
-  Future getSimilarMovies(int movieId) async {
+  Future<List<Movie>> getSimilarMovies(int movieId) async {
     return await repository.getSimilarMovies(movieId);
   }
 
-  Future getMovieDetail(int movieId) async {
+  Future<Movie> getMovieDetail(int movieId) async {
     return await repository.getMovieDetail(movieId);
   }
 
-  Future getPopularMovies(int page) async {
+  Future<List<Movie>> getPopularMovies(int page) async {
     return await repository.getPopularMovies(page);
+  }
+
+  Future<List<Cast>> getCasts(int movieId) async {
+    return await repository.getCasts(movieId);
   }
 }
