@@ -13,9 +13,16 @@ class MovieSearchDelegate extends SearchDelegate {
   @override
   List<Widget>? buildActions(BuildContext context) {
     if (query.isEmpty) {
-      return [renderCloseIconButton(Icons.cancel)];
+      return [
+        renderCloseIconButton(Icons.cancel),
+      ];
     }
     return [
+      IconButton(
+          onPressed: () {
+            showResults(context);
+          },
+          icon: Icon(Icons.search)),
       IconButton(
         onPressed: () {
           query = '';
@@ -56,7 +63,7 @@ class MovieSearchDelegate extends SearchDelegate {
             ref.read(movieSearchProvider.notifier).clearSearch();
             close(context, null);
           },
-          icon: Icon(Icons.arrow_back));
+          icon: Icon(icon));
     });
   }
 
