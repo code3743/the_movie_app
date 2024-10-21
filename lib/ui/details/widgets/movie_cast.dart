@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:the_movie_app/config/themes/app_colors.dart';
 import 'package:the_movie_app/domain/entites/cast.dart';
-import 'package:the_movie_app/shared/utils/format_image_url.dart';
+import 'package:the_movie_app/common/utils/format_image_url.dart';
 
 class MovieCast extends StatelessWidget {
   const MovieCast({

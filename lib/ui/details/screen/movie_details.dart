@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:the_movie_app/config/themes/app_colors.dart';
 import 'package:the_movie_app/domain/entites/movie.dart';
-import 'package:the_movie_app/shared/widgets/movie_collection.dart';
+import 'package:the_movie_app/common/widgets/movie_collection.dart';
 import 'package:the_movie_app/ui/details/providers/movie_details_provider.dart';
 import 'package:the_movie_app/ui/details/widgets/widgets.dart';
 

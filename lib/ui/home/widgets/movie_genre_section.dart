@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:the_movie_app/domain/entites/movie.dart';
-import 'package:the_movie_app/shared/widgets/movie_tile.dart';
+import 'package:the_movie_app/common/widgets/movie_tile.dart';
 import 'package:the_movie_app/config/router/app_router_name.dart';
 import 'package:the_movie_app/ui/home/widgets/list_category.dart';
-import 'package:the_movie_app/shared/utils/format_image_url.dart';
-import 'package:the_movie_app/shared/providers/genre_provider.dart';
+import 'package:the_movie_app/common/utils/format_image_url.dart';
+import 'package:the_movie_app/common/providers/genre_provider.dart';
 import 'package:the_movie_app/ui/home/providers/movies_by_category_provider.dart';
 
 class MovieGenreSection extends StatelessWidget {

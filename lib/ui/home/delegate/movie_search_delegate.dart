@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:the_movie_app/config/router/app_router_name.dart';
-import 'package:the_movie_app/shared/utils/format_image_url.dart';
+import 'package:the_movie_app/common/utils/format_image_url.dart';
 import 'package:the_movie_app/ui/home/providers/movie_search_provider.dart';
 
 class MovieSearchDelegate extends SearchDelegate {

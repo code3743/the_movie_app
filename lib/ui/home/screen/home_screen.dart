@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:the_movie_app/ui/home/delegate/movie_search_delegate.dart';
 import 'package:the_movie_app/ui/home/providers/get_movies_provider.dart';
-import 'package:the_movie_app/shared/widgets/widgets.dart';
+import 'package:the_movie_app/common/widgets/widgets.dart';
 import 'package:the_movie_app/ui/home/providers/movie_search_provider.dart';
 import 'package:the_movie_app/ui/home/widgets/widgets.dart';
 

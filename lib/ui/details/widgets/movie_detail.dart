@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:the_movie_app/config/themes/app_colors.dart';
-import 'package:the_movie_app/shared/widgets/custom_button.dart';
+import 'package:the_movie_app/common/widgets/custom_button.dart';
 import 'package:the_movie_app/ui/details/widgets/expandable_text.dart';
 
 class MovieDetail extends StatelessWidget {

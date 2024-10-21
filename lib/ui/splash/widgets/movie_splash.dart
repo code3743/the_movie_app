@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:the_movie_app/config/themes/app_colors.dart';
-import 'package:the_movie_app/shared/providers/now_playing_provider.dart';
+import 'package:the_movie_app/common/providers/now_playing_provider.dart';
 import 'package:the_movie_app/ui/splash/widgets/movie_list.dart';
 
 class MovieSplash extends StatelessWidget {

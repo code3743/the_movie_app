@@ -5,7 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:the_movie_app/config/router/app_router_name.dart';
 import 'package:the_movie_app/domain/entites/movie.dart';
-import 'package:the_movie_app/shared/providers/now_playing_provider.dart';
+import 'package:the_movie_app/common/providers/now_playing_provider.dart';
 import 'package:the_movie_app/ui/home/widgets/movie_preview.dart';
 
 class MovieBanner extends StatefulWidget {

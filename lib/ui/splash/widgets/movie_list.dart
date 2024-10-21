@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:the_movie_app/shared/utils/format_image_url.dart';
+import 'package:the_movie_app/common/utils/format_image_url.dart';
 
 class MoviesList extends StatefulWidget {
   const MoviesList({
@@ -57,6 +57,8 @@ class _MoviesListState extends State<MoviesList> with TickerProviderStateMixin {
                   child: Image.network(
                     formatImageUrl(widget.moviePosters[index]),
                     fit: BoxFit.cover,
+                    errorBuilder: (context, error, stackTrace) =>
+                        const Center(child: Icon(Icons.error)),
                   )),
             ),
           ),
