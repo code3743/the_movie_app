@@ -168,6 +168,14 @@ La arquitectura utilizada en este proyecto implementa una arquitectura limpia, p
 │               └── movie_list_test.dart
 ```
 
+### Ejecución de Pruebas
+
+Para ejecutar las pruebas unitarias, utiliza el siguiente comando:
+
+```bash
+flutter test
+```
+
 ## Mejoras y Optimización
 
 ### Otras Bibliotecas o Paquetes de Flutter
