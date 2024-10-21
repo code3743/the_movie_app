@@ -32,7 +32,6 @@ class _MovieCollectionState extends State<MovieCollection> {
     _scrollController.addListener(() {
       if (_scrollController.position.pixels >
           _scrollController.position.maxScrollExtent - 600) {
-        print('load more');
         widget.onMore?.call();
       }
     });
