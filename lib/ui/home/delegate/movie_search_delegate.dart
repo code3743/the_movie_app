@@ -75,7 +75,9 @@ class MovieSearchDelegate extends SearchDelegate {
               onTap: () {
                 context.push(AppRouterName.movieDetail, extra: movies[index]);
               },
-              leading: Image.network(formatImageUrl(movies[index].posterPath)),
+              leading: Image.network(formatImageUrl(movies[index].posterPath),
+                  errorBuilder: (context, error, stackTrace) =>
+                      Icon(Icons.error)),
               title: Text(movies[index].title),
               trailing: Icon(Icons.arrow_forward_ios),
             );
