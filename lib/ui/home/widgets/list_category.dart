@@ -18,7 +18,7 @@ class ListCategory extends StatelessWidget {
       width: double.infinity,
       height: 40,
       child: ListView.builder(
-          itemCount: 10,
+          itemCount: categories.length,
           scrollDirection: Axis.horizontal,
           itemBuilder: (context, index) {
             return Padding(
@@ -28,11 +28,11 @@ class ListCategory extends StatelessWidget {
                   builder: (context, value, _) {
                     return TextCategory(
                       isSelected: value == index,
-                      index: index,
-                      onTap: (index) {
+                      onTap: () {
                         selectedCategory.value = index;
                         onTap(index);
                       },
+                      title: categories[index],
                     );
                   }),
             );

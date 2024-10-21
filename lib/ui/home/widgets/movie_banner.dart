@@ -1,7 +1,11 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:the_movie_app/config/themes/app_colors.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
+import 'package:the_movie_app/config/router/app_router_name.dart';
+import 'package:the_movie_app/shared/providers/now_playing_provider.dart';
+import 'package:the_movie_app/ui/home/widgets/movie_preview.dart';
 
 class MovieBanner extends StatefulWidget {
   const MovieBanner({
@@ -49,41 +53,38 @@ class _MovieBannerState extends State<MovieBanner> {
     return SizedBox(
       width: double.infinity,
       height: 400,
-      child: PageView.builder(
-          controller: _pageController,
-          itemCount: 10,
-          itemBuilder: (context, index) {
-            return GestureDetector(
-              onTap: () {
-                print('Selected index: $index');
-              },
-              child: Stack(
-                alignment: Alignment.center,
-                children: [
-                  Image.network(
-                    'https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Stray_calico_cat_near_Sagami_River-01.jpg/640px-Stray_calico_cat_near_Sagami_River-01.jpg',
-                    width: double.infinity,
-                    height: double.infinity,
-                    fit: BoxFit.cover,
-                  ),
-                  Container(
-                    width: double.infinity,
-                    height: 400,
-                    decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                            colors: [
-                              AppColors.background.withOpacity(.8),
-                              Colors.transparent,
-                              AppColors.background,
-                            ],
-                            begin: Alignment.topCenter,
-                            end: Alignment.bottomCenter,
-                            stops: [0, 0.5, 1])),
-                  ),
-                ],
-              ),
-            );
-          }),
+      child: Consumer(builder: (context, ref, _) {
+        return FutureBuilder(
+            future: ref.watch(nowPlayingProvider.future),
+            builder: (context, snapshot) {
+              if (snapshot.hasError) {
+                return Center(
+                  child: Text('An error occurred'),
+                );
+              }
+
+              if (!snapshot.hasData) {
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
+
+              return PageView.builder(
+                  controller: _pageController,
+                  itemCount: 10,
+                  itemBuilder: (context, index) {
+                    return GestureDetector(
+                      onTap: () {
+                        context.push(AppRouterName.movieDetail,
+                            extra: snapshot.data![index]);
+                      },
+                      child: MoviePreview(
+                        poster: snapshot.data![index].posterPath,
+                      ),
+                    );
+                  });
+            });
+      }),
     );
   }
 }

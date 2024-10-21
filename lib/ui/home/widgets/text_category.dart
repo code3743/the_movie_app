@@ -4,11 +4,11 @@ class TextCategory extends StatelessWidget {
   const TextCategory(
       {super.key,
       required this.isSelected,
-      required this.index,
-      required this.onTap});
+      required this.onTap,
+      required this.title});
   final bool isSelected;
-  final int index;
-  final ValueChanged<int> onTap;
+  final String title;
+  final void Function()? onTap;
 
   TextStyle getTextStyle(bool isSelected, BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
@@ -23,9 +23,7 @@ class TextCategory extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialButton(
         padding: EdgeInsets.zero,
-        onPressed: () {
-          onTap(index);
-        },
+        onPressed: onTap,
         child: SizedBox(
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -52,7 +50,7 @@ class TextCategory extends StatelessWidget {
                         ),
                       );
                     }),
-              Text('Item $index', style: getTextStyle(isSelected, context)),
+              Text(title, style: getTextStyle(isSelected, context)),
             ],
           ),
         ));
