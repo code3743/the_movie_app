@@ -68,7 +68,7 @@ class MovieModel {
   int id;
   String overview;
   String posterPath;
-  DateTime releaseDate;
+  DateTime? releaseDate;
   String title;
   bool video;
   double voteAverage;
@@ -88,19 +88,19 @@ class MovieModel {
   factory MovieModel.fromJson(Map<String, dynamic> json) => MovieModel(
         id: json["id"],
         overview: json["overview"],
-        posterPath: json["poster_path"] ?? "https://via.placeholder.com/150",
-        releaseDate: DateTime.parse(json["release_date"]),
+        posterPath: json["poster_path"] ?? "",
+        releaseDate: DateTime.tryParse(json["release_date"] ?? ''),
         title: json["title"],
         video: json["video"],
         voteAverage: json["vote_average"]?.toDouble(),
-        runtime: json["runtime"],
+        runtime: json["runtime"] ?? 0,
       );
 
   Movie toEntity([int runtime = 0, List<Genre> genres = const []]) {
     return Movie(
       id: id,
       title: title,
-      year: releaseDate.year.toString(),
+      year: releaseDate?.year.toString() ?? '',
       rating: voteAverage,
       overview: overview,
       posterPath: posterPath,

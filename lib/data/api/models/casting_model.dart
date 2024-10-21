@@ -51,7 +51,7 @@ class CastModel {
     return Cast(
       id: id.toString(),
       name: name,
-      profileImage: profilePath ?? "https://via.placeholder.com/150",
+      profileImage: profilePath ?? "",
       character: character ?? "",
     );
   }
