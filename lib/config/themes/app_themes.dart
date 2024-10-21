@@ -52,6 +52,19 @@ class AppTheme {
         buttonColor: AppColors.primary,
         height: AppSizes.buttonHeight,
       ),
+      bottomNavigationBarTheme: BottomNavigationBarThemeData(
+        backgroundColor: AppColors.background,
+        selectedItemColor: AppColors.primary,
+        unselectedItemColor: AppColors.textSecondary,
+        selectedLabelStyle: TextStyle(
+          fontSize: AppFonts.caption,
+          fontWeight: FontWeight.bold,
+        ),
+        unselectedLabelStyle: TextStyle(
+          fontSize: AppFonts.caption,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
       appBarTheme: AppBarTheme(
         color: AppColors.secondary,
         elevation: 0,
