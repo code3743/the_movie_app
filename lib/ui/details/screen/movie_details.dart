@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:the_movie_app/config/themes/app_colors.dart';
+import 'package:the_movie_app/domain/entites/movie.dart';
 import 'package:the_movie_app/shared/widgets/movie_collection.dart';
+import 'package:the_movie_app/ui/details/providers/movie_details_provider.dart';
 import 'package:the_movie_app/ui/details/widgets/widgets.dart';
 
-class MovieDetails extends StatelessWidget {
-  const MovieDetails({super.key});
-
+class MovieDetails extends ConsumerWidget {
+  const MovieDetails({super.key, required this.movie});
+  final Movie movie;
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final movieProvider = ref.watch(movieDetailsProvider(movie));
+    final notifier = ref.read(movieDetailsProvider(movie).notifier);
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -16,7 +21,9 @@ class MovieDetails extends StatelessWidget {
             Stack(
               alignment: Alignment.topCenter,
               children: [
-                MoviePoster(),
+                MoviePoster(
+                  poster: movieProvider.posterPath,
+                ),
                 Positioned(
                     left: 20,
                     top: 30,
@@ -24,28 +31,40 @@ class MovieDetails extends StatelessWidget {
                         style: IconButton.styleFrom(
                             backgroundColor:
                                 AppColors.secondary.withOpacity(.7)),
-                        onPressed: () {
-                          context.pop();
-                        },
+                        onPressed: () => context.pop(),
                         icon: Icon(Icons.arrow_back))),
               ],
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               child: MovieDetail(
-                title: 'Naruto Shippuden',
-                genre: 'Action, Adventure, Fantasy',
-                year: '2021',
-                rating: '4.5',
-                overview:
-                    'Naruto Shippuden is a Japanese manga series written and illustrated by Masashi Kishimoto. It tells the story of Naruto Uzumaki, a young ninja who seeks recognition from his peers and dreams of becoming the Hokage, the leader of his village.',
-                duration: '2h 32m',
+                title: movieProvider.title,
+                genre: movieProvider.genres.map((e) => e.name).join(', '),
+                year: movieProvider.year,
+                rating: movieProvider.rating.toStringAsFixed(2),
+                overview: movieProvider.overview,
+                duration: movieProvider.runtime == 0
+                    ? 'N/A'
+                    : '${movieProvider.runtime} min',
               ),
             ),
-            MovieCast(),
-            MovieCollection(colelctionName: 'Related Movies'),
+            FutureBuilder(
+                future: notifier.getCast(),
+                builder: (context, snapshot) {
+                  return MovieCast(
+                    casts: snapshot.data ?? [],
+                  );
+                }),
+            FutureBuilder(
+                future: notifier.getSimilarMovies(),
+                builder: (context, snapshot) {
+                  return MovieCollection(
+                    colelctionName: 'Similar Movies',
+                    movies: snapshot.data ?? [],
+                  );
+                }),
             SizedBox(
-              height: 20,
+              height: 30,
             ),
           ],
         ),

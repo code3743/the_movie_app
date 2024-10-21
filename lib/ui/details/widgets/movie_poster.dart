@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:the_movie_app/config/themes/app_colors.dart';
+import 'package:the_movie_app/shared/utils/format_image_url.dart';
 
 class MoviePoster extends StatelessWidget {
   const MoviePoster({
     super.key,
+    required this.poster,
   });
+
+  final String poster;
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +16,7 @@ class MoviePoster extends StatelessWidget {
       alignment: Alignment.bottomCenter,
       children: [
         Image.network(
-          'https://www.yourdecoration.es/cdn/shop/products/abystyle-abydco254-naruto-shippuden-shippuden-group-nr-2-poster-38x52cm_500x.jpg?v=1709734998',
+          formatImageUrl(poster),
           width: double.infinity,
           height: 445,
           fit: BoxFit.cover,

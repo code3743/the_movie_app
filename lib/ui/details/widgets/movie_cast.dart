@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:the_movie_app/config/themes/app_colors.dart';
+import 'package:the_movie_app/domain/entites/cast.dart';
+import 'package:the_movie_app/shared/utils/format_image_url.dart';
 
 class MovieCast extends StatelessWidget {
   const MovieCast({
     super.key,
+    required this.casts,
   });
-
+  final List<Cast> casts;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -22,9 +25,9 @@ class MovieCast extends StatelessWidget {
         ),
         SizedBox(
           width: double.infinity,
-          height: 150,
+          height: 175,
           child: ListView.builder(
-              itemCount: 10,
+              itemCount: casts.length,
               scrollDirection: Axis.horizontal,
               itemBuilder: (context, index) {
                 return Padding(
@@ -32,36 +35,47 @@ class MovieCast extends StatelessWidget {
                       ? const EdgeInsets.only(
                           left: 20, bottom: 8, right: 8, top: 8)
                       : const EdgeInsets.all(8.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Container(
-                        width: 100,
-                        height: 100,
-                        clipBehavior: Clip.antiAlias,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          border: Border.all(
-                            color: AppColors.accent,
-                            width: 2,
-                          ),
-                        ),
-                        child: ClipOval(
+                  child: SizedBox(
+                    width: 110,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Container(
+                          width: 100,
+                          height: 100,
                           clipBehavior: Clip.antiAlias,
-                          child: Image.network(
-                            'https://www.yourdecoration.es/cdn/shop/products/abystyle-abydco254-naruto-shippuden-shippuden-group-nr-2-poster-38x52cm_500x.jpg?v=1709734998',
-                            fit: BoxFit.cover,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            border: Border.all(
+                              color: AppColors.accent,
+                              width: 2,
+                            ),
+                          ),
+                          child: ClipOval(
+                            clipBehavior: Clip.antiAlias,
+                            child: Image.network(
+                              formatImageUrl(casts[index].profileImage),
+                              fit: BoxFit.cover,
+                            ),
                           ),
                         ),
-                      ),
-                      SizedBox(
-                        height: 2,
-                      ),
-                      Text('Actor $index',
-                          maxLines: 2,
-                          style: Theme.of(context).textTheme.bodyMedium),
-                    ],
+                        SizedBox(
+                          height: 2,
+                        ),
+                        Text(casts[index].name,
+                            maxLines: 2,
+                            textAlign: TextAlign.center,
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyMedium!
+                                .copyWith(height: 1)),
+                        Text(casts[index].character,
+                            textAlign: TextAlign.center,
+                            maxLines: 1,
+                            style: Theme.of(context).textTheme.bodySmall),
+                      ],
+                    ),
                   ),
                 );
               }),
